@@ -247,7 +247,7 @@
 			background: #eee;
 		}
 
-		.user-icon {
+		#user-icon {
 			width: 32px;
 			height: 32px;
 			border-radius: 50%;
@@ -257,7 +257,7 @@
 			z-index: 1001;
 		}
 
-		.user-menu {
+		#user-menu {
 			position: absolute;
 			top: 60px;
 			right: 0;
@@ -271,7 +271,7 @@
 			overflow: hidden;
 		}
 
-		.user-menu button {
+		#user-menu button {
 			display: block;
 			width: 100%;
 			padding: 10px 16px;
@@ -282,7 +282,7 @@
 			z-index: 1001;
 		}
 
-		.user-menu button:hover {
+		#user-menu button:hover {
 			background: #f2f2f7;
 			z-index: 1001;
 		}
@@ -372,12 +372,12 @@
 			background: #1c1c1e;
 		}
 
-		body.dark .user-menu {
+		body.dark #user-menu {
 			background: #1c1c1e;
 			border-color: #333;
 		}
 
-		body.dark .user-menu button {
+		body.dark #user-menu button {
 			color: #f2f2f7;
 		}
 
@@ -397,7 +397,7 @@
 		/* ボタン内アイコンのサイズ */
 		.menu-btn img,
 		.longpress-btn img,
-		.user-icon {
+		#user-icon {
 			width: 40px;
 			height: 40px;
 		}
@@ -449,19 +449,19 @@
 		<button id="login">Login</button>
 		<button id="signup">Sign up</button><br><br>
 		<button id="google-login">Login with Google</button>
-	</section>
+	</section> 
 
 	<section id="view-list" hidden>
 		<div class="flex-between">
 			<h2>Notes</h2>
 			<div style="display:flex;gap:8px;align-items:center;">
 				<button id="new-memo">＋</button>
-				<img class="user-icon" src="" title="User Menu">
-				<div class="user-menu">
-					<button class="spread-btn">Spread mode</button>
-					<button class="dark-btn">Dark mode</button>
-					<button class="go-trash">Trash</button>
-					<button class="logout-btn">Log out</button>
+				<img id="user-icon" src="" title="User Menu">
+				<div id="user-menu">
+					<button id="spread-btn">Spread mode</button>
+					<button id="dark-btn">Dark mode</button>
+					<button id="go-trash">Trash</button>
+					<button id="logout-btn">Log out</button>
 				</div>
 			</div>
 		</div>
@@ -475,31 +475,37 @@
 				<h2>Trash 🗑️</h2>
 			</div>
 			<div class="right-group">
-				<img class="user-icon" src="" title="User Menu">
-				<div class="user-menu">
-					<button class="spread-btn">Spread mode</button>
-					<button class="dark-btn">Dark mode</button>
-					<button class="go-trash">Trash</button>
-					<button class="logout-btn">Log out</button>
+				<img id="user-icon" src="" title="User Menu">
+				<div id="user-menu">
+					<button id="spread-btn">Spread mode</button>
+					<button id="dark-btn">Dark mode</button>
+					<button id="go-trash">Trash</button>
+					<button id="logout-btn">Log out</button>
 				</div>
 			</div>
 		</div>
 		<ul id="trash-list"></ul>
 	</section>
 
-	<section id="view-editor" hidden>
-		<div class="flex-between">
+	<!-- <section id="view-editor" hidden> -->
+	<!-- <section id="view-editor">
+		<button id="back"> ＜ </button>
+		<input id="title" placeholder="">
+		<div id="editor" contenteditable="true"></div>
+	</section> -->
+	<section id="view-editor">
+		<div class="flex-between" hidden>
 			<div class="left-group">
 				<button id="back"> ＜ </button>
 				<input id="title" placeholder="">
 			</div>
 			<div class="right-group">
-				<img class="user-icon" src="" title="User Menu">
-				<div class="user-menu">
-					<button class="spread-btn">Spread mode</button>
-					<button class="dark-btn">Dark mode</button>
-					<button class="go-trash">Trash</button>
-					<button class="logout-btn">Log out</button>
+				<img id="user-icon" src="" title="User Menu">
+				<div id="user-menu">
+					<button id="spread-btn">Spread mode</button>
+					<button id="dark-btn">Dark mode</button>
+					<button id="go-trash">Trash</button>
+					<button id="logout-btn">Log out</button>
 				</div>
 			</div>
 		</div>
@@ -538,8 +544,8 @@
 		const trashList = document.getElementById( 'trash-list' );
 		const editor = document.getElementById( 'editor' );
 		const titleInput = document.getElementById( 'title' );
-		// const userIcon = document.getElementById( 'user-icon' );
-		// const userMenu = document.getElementById( 'user-menu' );
+		const userIcon = document.getElementById( 'user-icon' );
+		const userMenu = document.getElementById( 'user-menu' );
 
 		// Dark mode toggle
 		const darkBtn = document.getElementById( 'dark-btn' );
@@ -592,7 +598,7 @@
 		document.getElementById( 'login' ).onclick = async () => { try { await signInWithEmailAndPassword( auth, emailInput.value, passwordInput.value ); } catch ( e ) { showToast( "ログイン失敗: " + e.message ); } };
 		document.getElementById( 'signup' ).onclick = async () => { try { await createUserWithEmailAndPassword( auth, emailInput.value, passwordInput.value ); } catch ( e ) { showToast( "サインアップ失敗: " + e.message ); } };
 		document.getElementById( 'google-login' ).onclick = async () => { try { await signInWithPopup( auth, provider ); } catch ( e ) { showToast( "Googleログイン失敗: " + e.message ); } };
-		// userIcon.onclick = () => { userMenu.style.display = ( userMenu.style.display === 'block' ) ? 'none' : 'block'; }
+		userIcon.onclick = () => { userMenu.style.display = ( userMenu.style.display === 'block' ) ? 'none' : 'block'; }
 		const switchAccountBtn = document.getElementById( 'switch-account' );
 		if ( switchAccountBtn ) {
 			switchAccountBtn.onclick = async () => {
@@ -605,11 +611,11 @@
 			};
 		}
 		document.getElementById( 'logout-btn' ).onclick = () => { userMenu.style.display = 'none'; signOut( auth ); location.hash = '#login'; }
-		// 複数ある場合は全てに対応
-		document.querySelectorAll( '.user-icon' ).forEach( icon => {
-			const menu = icon.nextElementSibling; // すぐ隣に .user-menu がある前提
-			icon.addEventListener( 'click', () => {
-				menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+		document.addEventListener( 'click', e => {
+			if ( !userMenu.contains( e.target ) && e.target !== userIcon ) userMenu.style.display = 'none';
+			document.querySelectorAll( '.menu-popup' ).forEach( menu => {
+				const btn = menu.previousSibling;
+				if ( !menu.contains( e.target ) && !btn.contains( e.target ) ) menu.style.display = 'none';
 			} );
 		} );
 
