@@ -76,6 +76,10 @@
 			font-size: 21px;
 		}
 
+		#view-trash h2 {
+			text-align: left;
+		}
+
 		#editor {
 			min-height: 70vh;
 			padding: 0px;
@@ -215,7 +219,7 @@
 			padding: 4px 0;
 			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 			display: none;
-			z-index: 10;
+			z-index: 1000;
 		}
 
 		.menu-popup button {
@@ -236,7 +240,9 @@
 			height: 32px;
 			border-radius: 50%;
 			cursor: pointer;
-			position: relative;
+			/* position: relative; */
+			position: fixed;
+			z-index: 10; 
 		}
 
 		#user-menu {
@@ -302,7 +308,7 @@
 
 		button {
 			cursor: pointer;
-			background: none;
+			/* background: none;これはやってはいけない */
 		}
 
 		.flex-between {
@@ -332,6 +338,7 @@
 		body.spread {
 			padding: 0px;
 		}
+
 		/* Dark mode styles */
 		body.dark {
 			background: #000;
@@ -453,8 +460,6 @@
 			<button id="back-list"> ＜ </button>
 			<h2>Trash 🗑️</h2>
 			<div style="display:flex;gap:8px;align-items:center;">
-				<!-- <button id="new-memo">＋</button> -->
-				<!-- <button id="go-trash">🗑️</button> -->
 				<img id="user-icon" src="" title="User Menu">
 				<div id="user-menu">
 					<button id="spread-btn">Spread mode</button>
