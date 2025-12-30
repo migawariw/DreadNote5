@@ -10,7 +10,7 @@
 	<style>
 		body {
 			margin: 0;
-			padding: 0px;
+			padding: 20px;
 			font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 			font-size: 17px;
 			background: #ffffff;
@@ -160,31 +160,32 @@
 		.twitter blockquote {
 			margin: 0;
 		}
-/* Instagram 完全フル幅 */
-.instagram {
-	position: relative;
-	width: 100%;
-	max-width: 800px;
-	margin: 0 auto;
-	overflow: hidden;
-}
 
-.instagram blockquote,
-.instagram blockquote.instagram-media {
-	margin: 0 !important;
-	padding: 0 !important;
-	width: 100% !important;
-	max-width: 100% !important;
-}
+		/* Instagram 完全フル幅 */
+		.instagram {
+			position: relative;
+			width: 100%;
+			max-width: 800px;
+			margin: 0 auto;
+			overflow: hidden;
+		}
 
-.instagram iframe {
-	width: 100% !important;
-	min-width: 100% !important;
-	max-width: 100% !important;
-	display: block !important;
-	margin: 0 auto !important;
-	border: 0;
-}
+		.instagram blockquote,
+		.instagram blockquote.instagram-media {
+			margin: 0 !important;
+			padding: 0 !important;
+			width: 100% !important;
+			max-width: 100% !important;
+		}
+
+		.instagram iframe {
+			width: 100% !important;
+			min-width: 100% !important;
+			max-width: 100% !important;
+			display: block !important;
+			margin: 0 auto !important;
+			border: 0;
+		}
 
 		.memo-right {
 			display: flex;
@@ -301,6 +302,7 @@
 
 		button {
 			cursor: pointer;
+			background: none;
 		}
 
 		.flex-between {
@@ -327,6 +329,9 @@
 			text-decoration: none !important;
 		}
 
+		body.spread {
+			padding: 0px;
+		}
 		/* Dark mode styles */
 		body.dark {
 			background: #000;
@@ -430,11 +435,13 @@
 			<h2>Notes</h2>
 			<div style="display:flex;gap:8px;align-items:center;">
 				<button id="new-memo">＋</button>
-				<button id="go-trash">🗑️</button>
+				<!-- <button id="go-trash">🗑️</button> -->
 				<img id="user-icon" src="" title="User Menu">
 				<div id="user-menu">
-					<button id="dark-btn">Darkmode</button>
-					<button id="logout-btn">Logout</button>
+					<button id="spread-btn">Spread mode</button>
+					<button id="dark-btn">Dark mode</button>
+					<button id="go-trash">Trash</button>
+					<button id="logout-btn">Log out</button>
 				</div>
 			</div>
 		</div>
@@ -443,14 +450,25 @@
 
 	<section id="view-trash" hidden>
 		<div class="flex-between">
+			<button id="back-list"> ＜ </button>
 			<h2>Trash 🗑️</h2>
-			<button id="back-list"> ← </button>
+			<div style="display:flex;gap:8px;align-items:center;">
+				<!-- <button id="new-memo">＋</button> -->
+				<!-- <button id="go-trash">🗑️</button> -->
+				<img id="user-icon" src="" title="User Menu">
+				<div id="user-menu">
+					<button id="spread-btn">Spread mode</button>
+					<button id="dark-btn">Dark mode</button>
+					<button id="go-trash">Trash</button>
+					<button id="logout-btn">Log out</button>
+				</div>
+			</div>
 		</div>
 		<ul id="trash-list"></ul>
 	</section>
 
 	<section id="view-editor" hidden>
-		<button id="back"> ← </button>
+		<button id="back"> ＜ </button>
 		<input id="title" placeholder="">
 		<div id="editor" contenteditable="true"></div>
 	</section>
@@ -500,6 +518,19 @@
 				localStorage.setItem(
 					'dreadnote-dark',
 					document.body.classList.contains( 'dark' ) ? '1' : '0'
+				);
+			};
+		}
+		// Spread mode toggle
+		const spreadBtn = document.getElementById( 'spread-btn' );
+
+		if ( spreadBtn ) {
+			spreadBtn.onclick = ( e ) => {
+				e.stopPropagation();
+				document.body.classList.toggle( 'spread' );
+				localStorage.setItem(
+					'dreadnote-spread',
+					document.body.classList.contains( 'spread' ) ? '1' : '0'
 				);
 			};
 		}
