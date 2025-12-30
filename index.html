@@ -160,15 +160,31 @@
 		.twitter blockquote {
 			margin: 0;
 		}
-		.instagram {
-			width: 100%;
-			padding-top: 0;
-			margin: 0;
-		}
+/* Instagram 完全フル幅 */
+.instagram {
+	position: relative;
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+	overflow: hidden;
+}
 
-		.instagram blockquote {
-			margin: 0;
-		}
+.instagram blockquote,
+.instagram blockquote.instagram-media {
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+.instagram iframe {
+	width: 100% !important;
+	min-width: 100% !important;
+	max-width: 100% !important;
+	display: block !important;
+	margin: 0 auto !important;
+	border: 0;
+}
 
 		.memo-right {
 			display: flex;
